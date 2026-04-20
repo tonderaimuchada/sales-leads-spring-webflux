@@ -7,10 +7,12 @@ package za.co.instacom.salesleads.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import za.co.instacom.salesleads.entity.Lead;
 import za.co.instacom.salesleads.repository.LeadRepository;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class LeadServiceImplementation implements LeadService {
@@ -18,27 +20,39 @@ public class LeadServiceImplementation implements LeadService {
     private LeadRepository leadRepository;
 
     @Override
-    public Lead createLead(Lead lead) {
+    public Mono<Lead> createLead(Lead lead) {
         return leadRepository.save(lead);
     }
 
     @Override
-    public List<Lead> findAllLeads() {
-        return (List<Lead>) leadRepository.findAll();
+    public Flux<Lead> findAllLeads() {
+        return leadRepository.findAll();
     }
 
     @Override
-    public Lead findLeadById(Long id) {
-        return leadRepository.findById(id).orElse(null);
+    public Mono<Lead> findLeadById(Long id) {
+        return leadRepository.findById(id);
     }
 
     @Override
-    public Lead updateLead(Lead lead) {
-        return leadRepository.save(lead);
+    public Mono<Lead> updateLead(Lead lead, Long id) {
+        return leadRepository.findById(id)
+                .map((l) -> {
+                    l.setFirstName(lead.getFirstName());
+                    l.setLastName(lead.getLastName());
+                    l.setCompanyName(lead.getCompanyName());
+                    l.setJobTitle(lead.getJobTitle());
+                    l.setEmail(lead.getEmail());
+                    l.setPhoneNumber(lead.getPhoneNumber());
+                    l.setAddress(lead.getAddress());
+                    l.setDateModified(LocalDateTime.now());
+                    return l;
+                })
+                .flatMap(leadRepository::save);
     }
 
     @Override
-    public void deleteLeadById(Long id) {
-        leadRepository.deleteById(id);
+    public Mono<Void> deleteLeadById(Long id) {
+        return leadRepository.deleteById(id);
     }
 }

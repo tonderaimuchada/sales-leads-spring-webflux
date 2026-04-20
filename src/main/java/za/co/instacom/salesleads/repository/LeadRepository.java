@@ -5,10 +5,10 @@
 
 package za.co.instacom.salesleads.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import za.co.instacom.salesleads.entity.Lead;
 
 @Repository
-public interface LeadRepository extends JpaRepository<Lead, Long> {
+public interface LeadRepository extends ReactiveCrudRepository<Lead, Long> {
 }

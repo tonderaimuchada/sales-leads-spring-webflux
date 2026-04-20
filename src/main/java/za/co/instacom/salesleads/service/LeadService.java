@@ -5,14 +5,14 @@
 
 package za.co.instacom.salesleads.service;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import za.co.instacom.salesleads.entity.Lead;
 
-import java.util.List;
-
 public interface LeadService {
-    Lead createLead(Lead lead);
-    List<Lead> findAllLeads();
-    Lead findLeadById(Long id);
-    Lead updateLead(Lead lead);
-    void deleteLeadById(Long id);
+    Mono<Lead> createLead(Lead lead);
+    Flux<Lead> findAllLeads();
+    Mono<Lead> findLeadById(Long id);
+    Mono<Lead> updateLead(Lead lead, Long id);
+    Mono<Void> deleteLeadById(Long id);
 }
