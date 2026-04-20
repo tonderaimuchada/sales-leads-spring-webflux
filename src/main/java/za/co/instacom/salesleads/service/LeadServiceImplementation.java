@@ -12,6 +12,8 @@ import reactor.core.publisher.Mono;
 import za.co.instacom.salesleads.entity.Lead;
 import za.co.instacom.salesleads.repository.LeadRepository;
 
+import java.time.LocalDateTime;
+
 @Service
 public class LeadServiceImplementation implements LeadService {
     @Autowired
@@ -34,7 +36,19 @@ public class LeadServiceImplementation implements LeadService {
 
     @Override
     public Mono<Lead> updateLead(Lead lead, Long id) {
-        return leadRepository.save(lead);
+        return leadRepository.findById(id)
+                .map((l) -> {
+                    l.setFirstName(lead.getFirstName());
+                    l.setLastName(lead.getLastName());
+                    l.setCompanyName(lead.getCompanyName());
+                    l.setJobTitle(lead.getJobTitle());
+                    l.setEmail(lead.getEmail());
+                    l.setPhoneNumber(lead.getPhoneNumber());
+                    l.setAddress(lead.getAddress());
+                    l.setDateModified(LocalDateTime.now());
+                    return l;
+                })
+                .flatMap(leadRepository::save);
     }
 
     @Override
