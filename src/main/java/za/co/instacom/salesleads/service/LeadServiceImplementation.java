@@ -5,7 +5,7 @@
 
 package za.co.instacom.salesleads.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,10 +14,11 @@ import za.co.instacom.salesleads.repository.LeadRepository;
 
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Service
 public class LeadServiceImplementation implements LeadService {
-    @Autowired
-    private LeadRepository leadRepository;
+
+    private final LeadRepository leadRepository;
 
     @Override
     public Mono<Lead> createLead(Lead lead) {
