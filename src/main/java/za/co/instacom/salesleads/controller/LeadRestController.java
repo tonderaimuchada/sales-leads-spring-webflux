@@ -13,6 +13,7 @@ import za.co.instacom.salesleads.entity.Lead;
 import za.co.instacom.salesleads.service.LeadService;
 
 @RestController
+@RequestMapping("/api/leads")
 public class LeadRestController {
     @Autowired
     private LeadService leadService;

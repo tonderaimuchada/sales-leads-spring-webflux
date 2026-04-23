@@ -78,13 +78,12 @@ class SalesLeadsApplicationTests {
     @Test
     void shouldCreateLeadSuccessfully() {
         LeadDto.CreateRequest request = LeadDto.CreateRequest.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .email("john.doe@example.com")
-                .phone("+1-555-0199")
-                .company("Test Corp")
+                .fullName("John Doe")
+                .emailAddress("john.doe@example.com")
+                .phoneNumber("+27-0199")
+                .companyName("Test Corp")
                 .status("NEW")
-                .source("Test")
+                .createdBy("Test")
                 .build();
 
         webTestClient.post()
@@ -97,8 +96,8 @@ class SalesLeadsApplicationTests {
                 .expectBody(LeadDto.Response.class)
                 .value(lead -> {
                     assert lead.getId() != null;
-                    assert "John".equals(lead.getFirstName());
-                    assert "john.doe@example.com".equals(lead.getEmail());
+                    assert "John Doe".equals(lead.getFullName());
+                    assert "john.doe@example.com".equals(lead.getEmailAddress());
                 });
     }
 
@@ -113,9 +112,8 @@ class SalesLeadsApplicationTests {
     @Test
     void shouldReturnValidationErrorForInvalidEmail() {
         LeadDto.CreateRequest request = LeadDto.CreateRequest.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .email("not-an-email")
+                .fullName("John Doe")
+                .emailAddress("not-an-email")
                 .build();
 
         webTestClient.post()
