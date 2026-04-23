@@ -31,5 +31,4 @@ public class Lead {
     private String status;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
-    private String createdBy;
 }
