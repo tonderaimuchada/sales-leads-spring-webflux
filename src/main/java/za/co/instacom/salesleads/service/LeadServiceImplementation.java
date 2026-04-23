@@ -39,13 +39,10 @@ public class LeadServiceImplementation implements LeadService {
     public Mono<Lead> updateLead(Lead lead, Long id) {
         return leadRepository.findById(id)
                 .map((l) -> {
-                    l.setFirstName(lead.getFirstName());
-                    l.setLastName(lead.getLastName());
-                    l.setCompanyName(lead.getCompanyName());
-                    l.setJobTitle(lead.getJobTitle());
-                    l.setEmail(lead.getEmail());
+                    l.setFullName(lead.getFullName());
+                    l.setEmailAddress(lead.getEmailAddress());
                     l.setPhoneNumber(lead.getPhoneNumber());
-                    l.setAddress(lead.getAddress());
+                    l.setStatus(lead.getStatus());
                     l.setDateModified(LocalDateTime.now());
                     return l;
                 })
