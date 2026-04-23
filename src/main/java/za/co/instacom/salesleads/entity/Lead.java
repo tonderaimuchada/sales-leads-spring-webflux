@@ -25,13 +25,11 @@ public class Lead {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long leadId;
-    private String firstName;
-    private String lastName;
-    private String companyName;
-    private String jobTitle;
-    private String email;
+    private String fullName;
+    private String emailAddress;
     private String phoneNumber;
-    private String address;
+    private String status;
     private LocalDateTime dateCreated;
     private LocalDateTime dateModified;
+    private String createdBy;
 }
