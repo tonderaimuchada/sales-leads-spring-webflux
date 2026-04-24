@@ -40,9 +40,6 @@ public class LeadDto {
 
         @Size(max = 100, message = "Status must not exceed 100 characters")
         private String status;
-
-        @Size(max = 255, message = "Created By must not exceed 255 characters")
-        private String createdBy;
     }
 
     @Data
@@ -65,9 +62,6 @@ public class LeadDto {
 
         @Size(max = 100, message = "Status must not exceed 100 characters")
         private String status;
-
-        @Size(max = 255, message = "Source must not exceed 255 characters")
-        private String createdBy;
     }
 
     @Data
@@ -83,7 +77,6 @@ public class LeadDto {
         private String status;
         private LocalDateTime dateCreated;
         private LocalDateTime dateModified;
-        private String createdBy;
     }
 
     @Data
