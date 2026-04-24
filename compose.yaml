@@ -4,7 +4,7 @@ services:
     image: postgres:15
     environment:
       POSTGRES_DB: sales_leads
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
